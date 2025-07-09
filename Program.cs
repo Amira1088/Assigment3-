@@ -1,293 +1,258 @@
 ﻿using System;
+using System.Linq;
 
 class Program
 {
     static void Main()
     {
-        Question6.Run();
+        
+        Question19.Run();
+      
     }
 }
 
-#region Question 6
-// Print numbers from 1 to input number
-class Question6
+#region Question 19
+class Question19
 {
     public static void Run()
     {
-        Console.Write("Enter a number: ");
-        int num = int.Parse(Console.ReadLine());
-        for (int i = 1; i <= num; i++)
+        Console.Write("Enter size of identity matrix: ");
+        int n = int.Parse(Console.ReadLine());
+
+        for (int i = 0; i < n; i++)
         {
-            Console.Write(i + " ");
+            for (int j = 0; j < n; j++)
+            {
+                Console.Write(i == j ? "1 " : "0 ");
+            }
+            Console.WriteLine();
         }
     }
 }
 #endregion
 
-#region Question 7
-// Multiplication table up to 12
-class Question7
+#region Question 20
+class Question20
 {
     public static void Run()
     {
-        Console.Write("Enter a number: ");
-        int num = int.Parse(Console.ReadLine());
-        for (int i = 1; i <= 12; i++)
-        {
-            Console.Write(num * i + " ");
-        }
+        Console.Write("Enter size of array: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = new int[n];
+
+        Console.WriteLine("Enter array elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = int.Parse(Console.ReadLine());
+
+        int sum = arr.Sum();
+        Console.WriteLine("Sum = " + sum);
     }
 }
 #endregion
 
-#region Question 8
-// Print even numbers between 1 and input number
-class Question8
+#region Question 21
+class Question21
 {
     public static void Run()
     {
-        Console.Write("Enter a number: ");
-        int num = int.Parse(Console.ReadLine());
-        for (int i = 2; i <= num; i += 2)
-        {
-            Console.Write(i + " ");
-        }
+        Console.Write("Enter size of arrays: ");
+        int n = int.Parse(Console.ReadLine());
+
+        int[] arr1 = new int[n];
+        int[] arr2 = new int[n];
+
+        Console.WriteLine("Enter elements of first array:");
+        for (int i = 0; i < n; i++)
+            arr1[i] = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter elements of second array:");
+        for (int i = 0; i < n; i++)
+            arr2[i] = int.Parse(Console.ReadLine());
+
+        int[] merged = arr1.Concat(arr2).ToArray();
+        Array.Sort(merged);
+
+        Console.WriteLine("Merged and sorted array:");
+        Console.WriteLine(string.Join(" ", merged));
     }
 }
 #endregion
 
-#region Question 9
-// Power of two numbers
-class Question9
+#region Question 22
+class Question22
 {
     public static void Run()
     {
-        Console.Write("Enter base: ");
-        int baseNum = int.Parse(Console.ReadLine());
-        Console.Write("Enter exponent: ");
-        int exp = int.Parse(Console.ReadLine());
+        Console.Write("Enter size of array: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = new int[n];
+        Dictionary<int, int> freq = new Dictionary<int, int>();
 
-        int result = 1;
-        for (int i = 0; i < exp; i++)
+        Console.WriteLine("Enter array elements:");
+        for (int i = 0; i < n; i++)
         {
-            result *= baseNum;
+            arr[i] = int.Parse(Console.ReadLine());
+            if (freq.ContainsKey(arr[i]))
+                freq[arr[i]]++;
+            else
+                freq[arr[i]] = 1;
         }
 
-        Console.WriteLine("Result: " + result);
+        Console.WriteLine("Element frequencies:");
+        foreach (var item in freq)
+            Console.WriteLine($"{item.Key} occurs {item.Value} times");
     }
 }
 #endregion
 
-#region Question 10
-// Total, Average, and Percentage of 5 subjects
-class Question10
+#region Question 23
+class Question23
 {
     public static void Run()
     {
-        int[] marks = new int[5];
-        int total = 0;
+        Console.Write("Enter size of array: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = new int[n];
 
-        Console.WriteLine("Enter marks of 5 subjects:");
-        for (int i = 0; i < 5; i++)
-        {
-            marks[i] = int.Parse(Console.ReadLine());
-            total += marks[i];
-        }
+        Console.WriteLine("Enter array elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = int.Parse(Console.ReadLine());
 
-        float average = total / 5f;
-        float percentage = (total / 500f) * 100;
+        int min = arr.Min();
+        int max = arr.Max();
 
-        Console.WriteLine("Total = " + total);
-        Console.WriteLine("Average = " + average);
-        Console.WriteLine("Percentage = " + percentage);
+        Console.WriteLine("Minimum = " + min);
+        Console.WriteLine("Maximum = " + max);
     }
 }
 #endregion
 
-#region Question 11
-// Days in month
-class Question11
+#region Question 24
+class Question24
 {
     public static void Run()
     {
-        Console.Write("Enter month number (1-12): ");
-        int month = int.Parse(Console.ReadLine());
-        int days;
+        Console.Write("Enter size of array: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = new int[n];
 
-        switch (month)
-        {
-            case 2: days = 28; break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                days = 30; break;
-            default:
-                days = 31; break;
-        }
+        Console.WriteLine("Enter array elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = int.Parse(Console.ReadLine());
 
-        Console.WriteLine("Days in Month: " + days);
-    }
-}
-#endregion
-
-#region Question 12
-// Simple Calculator
-class Question12
-{
-    public static void Run()
-    {
-        Console.Write("Enter first number: ");
-        double num1 = double.Parse(Console.ReadLine());
-
-        Console.Write("Enter operator (+, -, *, /): ");
-        char op = char.Parse(Console.ReadLine());
-
-        Console.Write("Enter second number: ");
-        double num2 = double.Parse(Console.ReadLine());
-
-        double result = 0;
-        bool valid = true;
-
-        switch (op)
-        {
-            case '+': result = num1 + num2; break;
-            case '-': result = num1 - num2; break;
-            case '*': result = num1 * num2; break;
-            case '/':
-                if (num2 != 0) result = num1 / num2;
-                else
-                {
-                    Console.WriteLine("Cannot divide by zero.");
-                    valid = false;
-                }
-                break;
-            default:
-                Console.WriteLine("Invalid operator.");
-                valid = false;
-                break;
-        }
-
-        if (valid)
-            Console.WriteLine("Result = " + result);
-    }
-}
-#endregion
-
-#region Question 13
-// Reverse a string
-class Question13
-{
-    public static void Run()
-    {
-        Console.Write("Enter a string: ");
-        string input = Console.ReadLine();
-
-        char[] arr = input.ToCharArray();
+        Array.Sort(arr);
         Array.Reverse(arr);
 
-        Console.WriteLine("Reversed: " + new string(arr));
-    }
-}
-#endregion
+        int first = arr[0];
+        int secondLargest = -1;
 
-#region Question 14
-// Reverse an integer
-class Question14
-{
-    public static void Run()
-    {
-        Console.Write("Enter an integer: ");
-        int num = int.Parse(Console.ReadLine());
-        int reversed = 0;
-
-        while (num != 0)
+        for (int i = 1; i < n; i++)
         {
-            int digit = num % 10;
-            reversed = reversed * 10 + digit;
-            num /= 10;
+            if (arr[i] != first)
+            {
+                secondLargest = arr[i];
+                break;
+            }
         }
 
-        Console.WriteLine("Reversed: " + reversed);
+        Console.WriteLine("Second largest = " + (secondLargest == -1 ? "Not found" : secondLargest.ToString()));
     }
 }
 #endregion
 
-#region Question 15
-// Prime numbers in a range
-class Question15
+#region Question 25
+class Question25
 {
     public static void Run()
     {
-        Console.Write("Enter start number: ");
-        int start = int.Parse(Console.ReadLine());
+        Console.Write("Enter size of array: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = new int[n];
 
-        Console.Write("Enter end number: ");
-        int end = int.Parse(Console.ReadLine());
+        Console.WriteLine("Enter array elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = int.Parse(Console.ReadLine());
 
-        Console.WriteLine("Prime numbers between {0} and {1}:", start, end);
-        for (int i = start; i <= end; i++)
+        int maxDistance = 0;
+        Dictionary<int, int> firstIndex = new Dictionary<int, int>();
+
+        for (int i = 0; i < n; i++)
         {
-            if (IsPrime(i))
-                Console.Write(i + " ");
+            if (!firstIndex.ContainsKey(arr[i]))
+                firstIndex[arr[i]] = i;
+            else
+                maxDistance = Math.Max(maxDistance, i - firstIndex[arr[i]] - 1);
+        }
+
+        Console.WriteLine("Longest distance between equal cells: " + maxDistance);
+    }
+}
+#endregion
+
+#region Question 26
+class Question26
+{
+    public static void Run()
+    {
+        Console.Write("Enter a sentence: ");
+        string input = Console.ReadLine();
+        string[] words = input.Split(' ');
+        Array.Reverse(words);
+        Console.WriteLine(string.Join(" ", words));
+    }
+}
+#endregion
+
+#region Question 27
+class Question27
+{
+    public static void Run()
+    {
+        Console.Write("Enter rows: ");
+        int rows = int.Parse(Console.ReadLine());
+        Console.Write("Enter columns: ");
+        int cols = int.Parse(Console.ReadLine());
+
+        int[,] arr1 = new int[rows, cols];
+        int[,] arr2 = new int[rows, cols];
+
+        Console.WriteLine("Enter values for first array:");
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                arr1[i, j] = int.Parse(Console.ReadLine());
+
+        // Copy elements
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                arr2[i, j] = arr1[i, j];
+
+        Console.WriteLine("Second array:");
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+                Console.Write(arr2[i, j] + " ");
+            Console.WriteLine();
         }
     }
-
-    static bool IsPrime(int num)
-    {
-        if (num < 2) return false;
-        for (int i = 2; i <= Math.Sqrt(num); i++)
-            if (num % i == 0) return false;
-        return true;
-    }
 }
 #endregion
 
-#region Question 17
-// Check if 3 points lie on one line
-class Question17
+#region Question 28
+class Question28
 {
     public static void Run()
     {
-        Console.WriteLine("Enter (x1, y1): ");
-        double x1 = double.Parse(Console.ReadLine());
-        double y1 = double.Parse(Console.ReadLine());
+        Console.Write("Enter size of array: ");
+        int n = int.Parse(Console.ReadLine());
+        int[] arr = new int[n];
 
-        Console.WriteLine("Enter (x2, y2): ");
-        double x2 = double.Parse(Console.ReadLine());
-        double y2 = double.Parse(Console.ReadLine());
+        Console.WriteLine("Enter array elements:");
+        for (int i = 0; i < n; i++)
+            arr[i] = int.Parse(Console.ReadLine());
 
-        Console.WriteLine("Enter (x3, y3): ");
-        double x3 = double.Parse(Console.ReadLine());
-        double y3 = double.Parse(Console.ReadLine());
-
-        if ((y2 - y1) * (x3 - x2) == (y3 - y2) * (x2 - x1))
-            Console.WriteLine("Points lie on a straight line.");
-        else
-            Console.WriteLine("Points do not lie on a straight line.");
-    }
-}
-#endregion
-
-#region Question 18
-// Worker efficiency
-class Question18
-{
-    public static void Run()
-    {
-        Console.Write("Enter time taken by worker (in hours): ");
-        double time = double.Parse(Console.ReadLine());
-
-        if (time >= 2 && time < 3)
-            Console.WriteLine("Highly efficient.");
-        else if (time >= 3 && time < 4)
-            Console.WriteLine("Improve your speed.");
-        else if (time >= 4 && time <= 5)
-            Console.WriteLine("Training required.");
-        else if (time > 5)
-            Console.WriteLine("You are required to leave the company.");
-        else
-            Console.WriteLine("Invalid input.");
+        Array.Reverse(arr);
+        Console.WriteLine("Reversed array:");
+        Console.WriteLine(string.Join(" ", arr));
     }
 }
 #endregion
